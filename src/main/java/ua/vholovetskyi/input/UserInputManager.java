@@ -7,7 +7,7 @@ public class UserInputManager {
         this.args = args;
     }
 
-    public UserInputCommand processCommand() {
-        return new UserInputCommand(args);
+    public UserInputArgs processArgs() {
+        return new UserInputArgs(args);
     }
 }

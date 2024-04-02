@@ -9,11 +9,13 @@ import java.util.Optional;
 public class Order {
 
     private List<String> items = new ArrayList<>();
+    private Customer customer;
     private OrderStatus status;
     private LocalDateTime createdAt;
 
-    public Order(List<String> items, OrderStatus status) {
+    public Order(List<String> items, Customer customer, OrderStatus status) {
         this.items = items;
+        this.customer = customer;
         this.status = Optional.ofNullable(status).orElseGet(() -> OrderStatus.NEW);
     }
 
@@ -41,6 +43,14 @@ public class Order {
         this.createdAt = createdAt;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,5 +62,9 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(items, status, createdAt);
+    }
+
+    public int calculateNumberOfProduct() {
+        return items.size();
     }
 }

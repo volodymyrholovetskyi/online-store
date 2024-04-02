@@ -1,6 +1,5 @@
 package ua.vholovetskyi;
 
-import ua.vholovetskyi.input.UserInputCommand;
 import ua.vholovetskyi.input.UserInputManager;
 
 import java.util.logging.Logger;
@@ -16,6 +15,7 @@ public class OnlineStoreApplication {
         LOG.info("Start app...");
 
         var userInputManager = new UserInputManager(args);
-        var userInputCommand = userInputManager.processCommand();
+        var userInputArgs = userInputManager.processArgs();
+
     }
 }
