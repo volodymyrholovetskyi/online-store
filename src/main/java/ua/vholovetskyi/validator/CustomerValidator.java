@@ -7,12 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+/**
+ * @author Volodymyr Holovetskyi
+ * @version 1.0
+ * @since 2024-04-6
+ */
 public class CustomerValidator<T> implements Validator<Customer> {
-
-    public static final String EMAIL_PATTERN = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
-    public static final String PHONE_PATTERN = "((\\+38)?\\(?\\d{3}\\)?[\\s\\.-]?(\\d{7}|\\d{3}[\\s\\.-]\\d{2}[\\s\\.-]\\d{2}|\\d{3}-\\d{4}))";
-    private static final String EMPTY_FIELD_MESS = "The field cannot be empty";
-    private static final String INVALID_FORMAT = "Invalid field format";
+    private static final String EMPTY_FIELD_MESS = "The field cannot be empty!";
+    private static final String INVALID_FORMAT = "Invalid field format!";
+    private static final Pattern PHONE_PATTERN = Pattern.compile("\\+380\\d{9}");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
     private final Map<String, String> errors = new HashMap<>();
 
     @Override
@@ -20,6 +24,12 @@ public class CustomerValidator<T> implements Validator<Customer> {
 
         if (customer == null) {
             errors.put("Customer object", "null");
+            return errors;
+        }
+
+        var id = customer.getId();
+        if (id == null) {
+            errors.put("ID", EMPTY_FIELD_MESS);
             return errors;
         }
 
@@ -68,12 +78,10 @@ public class CustomerValidator<T> implements Validator<Customer> {
     }
 
     private boolean phoneIsValid(String phone) {
-        var phonePattern = Pattern.compile(PHONE_PATTERN);
-        return phonePattern.matcher(phone).matches();
+        return PHONE_PATTERN.matcher(phone).matches();
     }
 
     private boolean emailIsValid(String email) {
-        var emailPattern = Pattern.compile(EMAIL_PATTERN);
-        return emailPattern.matcher(email).matches();
+        return EMAIL_PATTERN.matcher(email).matches();
     }
 }
