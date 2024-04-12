@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OrderStatisticsServiceIT {
     private OrderStatisticsService orderService;
-    private String readFile = "./order_test/test.json";
-    private String saveFile = "./order_test/statistics_by_%s_test.xml";
+    private String readPath = "./order_test/test.json";
+    private String savePath = "./order_test/statistics_by_%s_test.xml";
 
     @AfterAll
     static void deleteFiles() throws IOException {
@@ -33,7 +33,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_return_statistics_for_status() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(readFile);
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(readPath);
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         Statistics expectedStatistics = givenStatisticsForStatus();
 
@@ -47,7 +47,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_save_statistics_for_status() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(saveFile.formatted("status"));
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(savePath.formatted("status"));
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         Statistics expectedStatistics = givenStatisticsForStatus();
 
@@ -61,7 +61,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_return_statistics_for_item() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(readFile);
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(readPath);
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         var expectedStatistics = givenStatisticsForItem();
 
@@ -75,7 +75,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_save_statistics_for_item() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(saveFile.formatted("item"));
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(savePath.formatted("item"));
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         var statistics = givenStatisticsForItem();
 
@@ -90,7 +90,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_return_statistics_for_orderDate() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(readFile);
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(readPath);
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         var expectedStatistics = givenStatisticsForOrderDate();
 
@@ -104,7 +104,7 @@ class OrderStatisticsServiceIT {
     @Test
     void should_save_statistics_for_orderDate() {
         //given
-        var orderStatisticsDao = new OrderStatisticsDaoImpl(saveFile.formatted("orderDate"));
+        var orderStatisticsDao = new OrderStatisticsDaoImpl(savePath.formatted("orderDate"));
         this.orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
         var statistics = givenStatisticsForOrderDate();
 

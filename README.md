@@ -91,7 +91,8 @@
 - Java 17
 - Lombok
 - JUnit 5, Mockito, AssertJ, JUnitParams
-- Jackson
+- Jackson Databind
+- Maven
 
 ## Set-up
 1. Папка [task](./task) містить усі необхідні файли для запуску програми є два варіанти запуску: запустити файл jar із консолі або запустити файл online-store.bat (він виконає три команди послідовно для створення трьох файлів: item, status, orderDate).
@@ -100,3 +101,5 @@
 - >java -jar online-store.jar order-data orderDate - підраховує замовлення на поточний день
 - >java -jar online-store.jar order-data status - підрахувати всі статуси
 - >java -jar online-store.jar order-data status <param_1> <param_2> ... - підрахувати тільки вибрані типи статусів (приймає будь-яку кількість параметрів, усі доступні: NEW, PAID, CANCELED, SHIPPED).
+
+<ins> Якщо передано непідтримувані аргументи, інформація про помилку буде виведена на консоль як WARNING LEVEL Log з інформацією про помилку.</ins>
