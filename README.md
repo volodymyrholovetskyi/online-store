@@ -97,7 +97,7 @@
 ## Set-up
 1. Папка [task](./task) містить усі необхідні файли для запуску програми є два варіанти запуску: запустити файл jar із консолі або запустити файл online-store.bat (він виконає три команди послідовно для створення трьох файлів: item, status, orderDate).
 2. Приклади запуску програми з допустимим аргументами:
-- >java -jar online-store.jar order-data items - підраховує продукти у всіх замовленнях
+- >java -jar online-store.jar order-data item - підраховує продукти у всіх замовленнях
 - >java -jar online-store.jar order-data orderDate - підраховує замовлення на поточний день
 - >java -jar online-store.jar order-data status - підрахувати всі статуси
 - >java -jar online-store.jar order-data status <param_1> <param_2> ... - підрахувати тільки вибрані типи статусів (приймає будь-яку кількість параметрів, усі доступні: NEW, PAID, CANCELED, SHIPPED).
