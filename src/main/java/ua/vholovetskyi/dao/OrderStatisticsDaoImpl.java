@@ -29,7 +29,7 @@ import static ua.vholovetskyi.utils.OrderFields.*;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-5
+ * @since 2024-04-05
  */
 public class OrderStatisticsDaoImpl implements OrderStatisticsDao {
     private static final Logger LOG = Logger.getLogger(OrderStatisticsDaoImpl.class.getName());
@@ -61,7 +61,7 @@ public class OrderStatisticsDaoImpl implements OrderStatisticsDao {
         } catch (IOException e) {
             LOG.log(Level.WARNING, "Error in getStatistics() method! Error message: %s".formatted(e.getMessage()));
         }
-        return new Statistics(sortItem(countItem));
+        return new Statistics(sortDescendingOrder(countItem));
     }
 
     private Order mappingOrder(JsonParser jsonParser) throws IOException {
@@ -123,7 +123,7 @@ public class OrderStatisticsDaoImpl implements OrderStatisticsDao {
         return order;
     }
 
-    private List<Statistics.ItemStatistics> sortItem(Map<String, Integer> countItem) {
+    private List<Statistics.ItemStatistics> sortDescendingOrder(Map<String, Integer> countItem) {
         return countItem.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .map(item -> new Statistics.ItemStatistics(item.getKey(), item.getValue()))

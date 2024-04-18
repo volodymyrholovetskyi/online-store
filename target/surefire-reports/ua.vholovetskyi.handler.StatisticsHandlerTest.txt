@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: ua.vholovetskyi.handler.StatisticsHandlerTest
--------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.141 s - in ua.vholovetskyi.handler.StatisticsHandlerTest

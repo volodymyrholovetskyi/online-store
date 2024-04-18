@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-4
+ * @since 2024-04-04
  */
 @Data
 @NoArgsConstructor

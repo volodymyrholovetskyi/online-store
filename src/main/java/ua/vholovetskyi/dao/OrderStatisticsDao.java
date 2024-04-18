@@ -6,7 +6,7 @@ import ua.vholovetskyi.service.dto.Statistics;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-5
+ * @since 2024-04-05
  */
 public interface OrderStatisticsDao {
 

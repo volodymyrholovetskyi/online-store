@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-5
+ * @since 2024-04-05
  */
 public interface StatisticsHandler {
 

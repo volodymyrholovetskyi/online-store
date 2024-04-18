@@ -11,11 +11,16 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Volodymyr Holovetskyi
+ * @version 1.0
+ * @since 2024-04-10
+ */
 public class OrderStatisticsReportXml implements OrderStatisticalReport {
 
     private static final Logger LOG = Logger.getLogger(OrderStatisticsReportXml.class.getName());
     private final ObjectMapper xmlMapper;
-    String fileName;
+    private final String fileName;
 
     public OrderStatisticsReportXml(String fileName) {
         this.fileName = fileName;

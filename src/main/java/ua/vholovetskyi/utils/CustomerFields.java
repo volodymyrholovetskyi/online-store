@@ -3,7 +3,7 @@ package ua.vholovetskyi.utils;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-6
+ * @since 2024-04-06
  */
 public final class CustomerFields {
     private CustomerFields() {

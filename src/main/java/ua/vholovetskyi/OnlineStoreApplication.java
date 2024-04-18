@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-3
+ * @since 2024-04-03
  */
 public class OnlineStoreApplication {
 

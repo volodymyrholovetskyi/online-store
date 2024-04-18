@@ -9,7 +9,7 @@ import static ua.vholovetskyi.utils.Attributes.*;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-5
+ * @since 2024-04-05
  */
 public class OrderDateHandler extends BaseHandler {
     @Override

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-4
+ * @since 2024-04-04
  */
 public class OrderStatisticsServiceImpl implements OrderStatisticsService {
 

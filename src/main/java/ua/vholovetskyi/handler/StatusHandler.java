@@ -12,7 +12,7 @@ import static ua.vholovetskyi.utils.Attributes.STATUS;
 /**
  * @author Volodymyr Holovetskyi
  * @version 1.0
- * @since 2024-04-5
+ * @since 2024-04-05
  */
 public class StatusHandler extends BaseHandler {
 
