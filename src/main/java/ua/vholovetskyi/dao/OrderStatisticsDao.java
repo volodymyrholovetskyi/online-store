@@ -14,14 +14,8 @@ public interface OrderStatisticsDao {
      * Retrieves statistics.
      *
      * @param handler passes the found handler to process statistics.
-     * @return a list of ItemStatistics.
+     * @return a list of ItemStatistics in descending order.
      */
-    Statistics getStatistics(StatisticsHandler handler);
+    Statistics getStatisticsDescOrder(StatisticsHandler handler);
 
-    /**
-     * Save statistics.
-     *
-     * @param statistics recording statistics in xml file.
-     */
-    void saveStatistics(Statistics statistics);
 }

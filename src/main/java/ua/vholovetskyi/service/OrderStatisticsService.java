@@ -1,6 +1,7 @@
 package ua.vholovetskyi.service;
 
 import ua.vholovetskyi.handler.StatisticsHandler;
+import ua.vholovetskyi.input.UserInputArgument;
 import ua.vholovetskyi.service.dto.Statistics;
 
 /**
@@ -11,17 +12,8 @@ import ua.vholovetskyi.service.dto.Statistics;
 public interface OrderStatisticsService {
 
     /**
-     * Retrieves statistics.
-     *
-     * @param handler passes the found handler to process statistics.
-     * @return a list of ItemStatistics.
+     * Generate statistics.
      */
-    Statistics getStatistics(StatisticsHandler handler);
+    void generateStatistics();
 
-    /**
-     * Save statistics.
-     *
-     * @param statistics recording statistics in xml file.
-     */
-    void saveStatistics(Statistics statistics);
 }

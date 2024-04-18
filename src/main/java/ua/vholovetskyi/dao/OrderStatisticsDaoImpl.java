@@ -3,8 +3,6 @@ package ua.vholovetskyi.dao;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import ua.vholovetskyi.handler.StatisticsHandler;
 import ua.vholovetskyi.model.Customer;
 import ua.vholovetskyi.model.Order;
@@ -39,17 +37,15 @@ public class OrderStatisticsDaoImpl implements OrderStatisticsDao {
     private final Validator<Customer> customerValidator;
     private final String fileName;
     private final ObjectMapper jsonMapper;
-    private final ObjectMapper xmlMapper;
 
     public OrderStatisticsDaoImpl(String fileName) {
         this.orderValidator = new OrderValidator<>();
         this.customerValidator = new CustomerValidator<>();
         this.fileName = fileName;
         this.jsonMapper = new ObjectMapper();
-        this.xmlMapper = new XmlMapper().enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    public Statistics getStatistics(StatisticsHandler handler) {
+    public Statistics getStatisticsDescOrder(StatisticsHandler handler) {
         LOG.log(Level.INFO, "The beginning of the formation of statistics...");
         final var countItem = new HashMap<String, Integer>();
         try (JsonParser jsonParser = jsonMapper.createParser(Files.readString(Paths.get(fileName), StandardCharsets.UTF_8))) {
@@ -66,16 +62,6 @@ public class OrderStatisticsDaoImpl implements OrderStatisticsDao {
             LOG.log(Level.WARNING, "Error in getStatistics() method! Error message: %s".formatted(e.getMessage()));
         }
         return new Statistics(sortItem(countItem));
-    }
-
-    @Override
-    public void saveStatistics(Statistics statistics) {
-        try (var bufferedWriter = Files.newBufferedWriter(Paths.get(fileName))) {
-            xmlMapper.writeValue(bufferedWriter, statistics);
-            LOG.log(Level.INFO, "Done! Statistics written to [%s].".formatted(fileName));
-        } catch (IOException e) {
-            LOG.log(Level.WARNING, "Error in saveStatistics() method! Error message: %s".formatted(e.getMessage()));
-        }
     }
 
     private Order mappingOrder(JsonParser jsonParser) throws IOException {

@@ -90,7 +90,7 @@
 ## Technologies
 - Java 17
 - Lombok
-- JUnit 5, Mockito, AssertJ, JUnitParams
+- JUnit 5, AssertJ, JUnitParams
 - Jackson Databind
 - Maven
 

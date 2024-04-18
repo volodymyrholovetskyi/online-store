@@ -2,18 +2,13 @@ package ua.vholovetskyi;
 
 import ua.vholovetskyi.dao.OrderStatisticsDao;
 import ua.vholovetskyi.dao.OrderStatisticsDaoImpl;
-import ua.vholovetskyi.handler.ItemHandler;
-import ua.vholovetskyi.handler.OrderDateHandler;
-import ua.vholovetskyi.handler.StatisticsHandler;
-import ua.vholovetskyi.handler.StatusHandler;
 import ua.vholovetskyi.input.UserInputArgument;
 import ua.vholovetskyi.input.UserInputManager;
+import ua.vholovetskyi.report.OrderStatisticalReport;
+import ua.vholovetskyi.report.OrderStatisticsReportXml;
 import ua.vholovetskyi.service.OrderStatisticsService;
 import ua.vholovetskyi.service.OrderStatisticsServiceImpl;
-import ua.vholovetskyi.service.dto.Statistics;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -46,17 +41,12 @@ public class OnlineStoreApplication {
             var userInputManager = new UserInputManager(args);
             var input = userInputManager.processArgs();
 
-            for (String path : input.getFiles()) {
+            for (String fileName : input.getFiles()) {
                 executorService.execute(() -> {
-                    //get statistics
-                    OrderStatisticsDao orderStatisticsDao = new OrderStatisticsDaoImpl(path);
-                    OrderStatisticsService orderService = new OrderStatisticsServiceImpl(orderStatisticsDao);
-                    Statistics statistics = orderService.getStatistics(getCurrentHandler(input));
-
-                    //save statistics
-                    OrderStatisticsDao saveOrderStatistics = new OrderStatisticsDaoImpl(getFileName(input.getAttribute()));
-                    OrderStatisticsService saveOrderService = new OrderStatisticsServiceImpl(saveOrderStatistics);
-                    saveOrderService.saveStatistics(statistics);
+                    OrderStatisticsDao orderStatisticsDao = new OrderStatisticsDaoImpl(fileName);
+                    OrderStatisticalReport statisticalReport = new OrderStatisticsReportXml(getFileName(input));
+                    OrderStatisticsService orderService = new OrderStatisticsServiceImpl(input, orderStatisticsDao, statisticalReport);
+                    orderService.generateStatistics();
                 });
             }
             executorService.shutdown();
@@ -67,28 +57,7 @@ public class OnlineStoreApplication {
         }
     }
 
-    private StatisticsHandler getCurrentHandler(UserInputArgument input) {
-        List<StatisticsHandler> handlers = listHandlers(input);
-
-        Optional<StatisticsHandler> currentHandler = Optional.empty();
-        for (StatisticsHandler handler : handlers) {
-            if (handler.supports(input.getAttribute())) {
-                currentHandler = Optional.of(handler);
-                break;
-            }
-        }
-        return currentHandler
-                .orElseThrow(() -> new IllegalArgumentException("Unsupported handler for the attribute: %s".formatted(input.getAttribute())));
-    }
-
-    private List<StatisticsHandler> listHandlers(UserInputArgument input) {
-        return List.of(
-                new ItemHandler(),
-                new StatusHandler(input.getStatusParams()),
-                new OrderDateHandler());
-    }
-
-    private String getFileName(String attribute) {
-        return FILE_TEMPLATE.formatted(attribute);
+    private String getFileName(UserInputArgument input) {
+        return FILE_TEMPLATE.formatted(input.getAttribute());
     }
 }
